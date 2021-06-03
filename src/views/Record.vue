@@ -65,7 +65,7 @@ export default {
   data() {
     return {
       record:{},
-      title:''
+      title:'',
     }
   },
   computed:{
@@ -73,18 +73,17 @@ export default {
   },
   methods: {
     showDeleteModal(record) {
-      this.record = record
+      this.record = JSON.parse(JSON.stringify(record))
       this.$bvModal.show('delete-modal')
     },
     deleteRecord() {
       this.$store.dispatch('deleteRecord', this.record) 
     },
     showUpdateModal(record) {
-      this.record = record
+      this.record = JSON.parse(JSON.stringify(record))
       this.$bvModal.show('update-modal')
     },
     updateRecord() {
-      console.log(this.record)
       this.$store.dispatch('updateRecord', this.record)
     }    
   },

@@ -1,17 +1,25 @@
 <template>
-  <div id="settings">
+  <div id="settings" class="container">
     <h3>設定</h3>
-    <p>プロフィールの更新</p>
+
+    <b-form-group
+      label="新しいユーザ名"
+      label-for="name"
+      class="my-2 col-6"
+    >
+      <b-form-input
+        id="name"
+        v-model.trim="name"
+        placeholder="Enter your name"
+      ></b-form-input>
+    </b-form-group>
+    <b-button @click="updateProfile()">更新</b-button>
+
 
     <div v-if="showSuccess" class="alert alert-success" role="alert">
       更新に成功しました。
     </div>
-        
-    <form @submit.prevent>
-      <label for="name">名前</label>
-      <input v-model.trim="name" type="">
-      <b-button @click="updateProfile()">更新</b-button>
-    </form>
+      
   </div>
 </template>
 

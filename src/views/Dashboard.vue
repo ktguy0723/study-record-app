@@ -18,20 +18,34 @@
           </b-form-group>
         </b-col>
       </b-row>
+
+      <b-row class="justify-content-center my-3">
+        <b-form-group label="グループ" class="col-md-6">
+          <b-form-radio-group
+            id="radio-group-2"
+            v-model="post.color"
+            :options="colorOptions"
+            name="color-btn"
+            button-variant="outline-secondary"
+            buttons
+          ></b-form-radio-group>
+        </b-form-group>
+      </b-row>
     </b-container>
 
+
     <div class="row justify-content-center">
-      <b-button @click="startTimer" variant="outline-primary" class="my-2 col-md-3 col-10">
+      <b-button @click="startTimer" variant="outline-secondary" class="my-2 col-md-3 col-10">
         {{ timerButton }}
       </b-button>
-      <b-button v-b-modal.reset variant="outline-primary" class="my-2 col-md-3 col-10" :class=" seconds ? '' : 'disabled' ">
+      <b-button v-b-modal.reset variant="outline-secondary" class="my-2 col-md-3 col-10" :class=" seconds ? '' : 'disabled' ">
         リセット
       </b-button>
     </div>
 
    
     <div class="row justify-content-center">
-      <b-button v-b-modal.post-time variant="outline-primary" class="my-2 col-md-3 col-10" :class=" seconds ? '' : 'disabled' ">
+      <b-button v-b-modal.post-time variant="outline-secondary" class="my-2 col-md-3 col-10" :class=" seconds ? '' : 'disabled' ">
         登録
       </b-button>
     </div>
@@ -73,8 +87,17 @@ export default {
       seconds: 0,
       timer: null,
       post: {
-        title: ''
+        title: '',
+        color: 'color-black'
       },
+
+      colorOptions: [
+        {text: 'RED', value: 'color-red'},
+        {text: 'BLUE', value: 'color-blue'},
+        {text: 'YELLOW', value: 'color-yellow'},
+        {text: 'GREEN', value: 'color-green'},
+        {text: 'BLACK', value: 'color-black'},
+      ]
     }
   },
   computed: {
@@ -120,7 +143,8 @@ export default {
     createRecord() {
       this.$store.dispatch('createRecord', {
         studyTime: this.seconds,
-        title: this.post.title
+        title: this.post.title,
+        color: this.post.color
       })
       this.resetTimer()
       this.post.title = ''
